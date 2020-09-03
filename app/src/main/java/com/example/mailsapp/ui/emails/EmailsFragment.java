@@ -28,21 +28,21 @@ public class EmailsFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-
-        View view = inflater.inflate(R.layout.emails_fragment, container, false);
-        String[] menuItems = {"Do something",
-                                "Do something else!",
-                                "Do yet another thing"};
-
-        ListView listView = (ListView)view.findViewById(R.id.emailsListView);
-
-        ArrayAdapter<String> listViewAdapter = new ArrayAdapter<String>(
-                getActivity(),
-                android.R.layout.simple_list_item_1,
-                menuItems
-        );
-        listView.setAdapter(listViewAdapter);
-        return view;
+        return inflater.inflate(R.layout.emails_fragment, container, false);
+//        View view = inflater.inflate(R.layout.emails_fragment, container, false);
+//        String[] menuItems = {"Do something",
+//                                "Do something else!",
+//                                "Do yet another thing"};
+//
+//        ListView listView = (ListView)view.findViewById(R.id.emailsListView);
+//
+//        ArrayAdapter<String> listViewAdapter = new ArrayAdapter<String>(
+//                getActivity(),
+//                android.R.layout.simple_list_item_1,
+//                menuItems
+//        );
+//        listView.setAdapter(listViewAdapter);
+//        return view;
     }
 
     @Override

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/emails"
@@ -7,9 +7,124 @@
     android:layout_height="match_parent"
     tools:context=".ui.emails.EmailsFragment">
 
-    <ListView
+    <!--    <ListView-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:id="@+id/emailsListView" />-->
+
+
+    <TextView
+        android:id="@+id/emailSubject"
+        android:layout_width="131dp"
+        android:layout_height="67dp"
+        android:layout_below="@+id/emailTo"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginStart="29dp"
+        android:layout_marginLeft="29dp"
+        android:layout_marginTop="78dp"
+        android:layout_marginEnd="34dp"
+        android:layout_marginRight="34dp"
+        android:layout_toStartOf="@+id/emailSubjectInput"
+        android:layout_toLeftOf="@+id/emailSubjectInput"
+        android:text="Subject:"
+        android:textSize="30dp"
+        tools:layout_editor_absoluteX="18dp"
+        tools:layout_editor_absoluteY="104dp" />
+
+    <TextView
+        android:id="@+id/emailContent"
+        android:layout_width="161dp"
+        android:layout_height="57dp"
+        android:layout_below="@+id/emailSubject"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginStart="26dp"
+        android:layout_marginLeft="26dp"
+        android:layout_marginTop="44dp"
+        android:layout_marginEnd="223dp"
+        android:layout_marginRight="223dp"
+        android:text="Content:"
+        android:textSize="30dp"
+        tools:layout_editor_absoluteX="18dp"
+        tools:layout_editor_absoluteY="198dp" />
+
+    <TextView
+        android:id="@+id/emailTo"
+        android:layout_width="131dp"
+        android:layout_height="67dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="24dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="22dp"
+        android:text="To:"
+        android:textSize="30dp"
+        tools:layout_editor_absoluteX="18dp"
+        tools:layout_editor_absoluteY="16dp" />
+
+    <EditText
+        android:id="@+id/emailToInput"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/emailsListView" />
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginStart="35dp"
+        android:layout_marginLeft="35dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="11dp"
+        android:layout_marginRight="11dp"
+        android:layout_toEndOf="@+id/emailTo"
+        android:layout_toRightOf="@+id/emailTo"
+        android:ems="10"
+        android:inputType="textEmailAddress"
+        android:text=""
+        tools:layout_editor_absoluteX="173dp"
+        tools:layout_editor_absoluteY="32dp" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <EditText
+        android:id="@+id/emailSubjectInput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/emailToInput"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:ems="10"
+        android:inputType="textEmailAddress"
+        android:text=""
+        tools:layout_editor_absoluteX="173dp"
+        tools:layout_editor_absoluteY="126dp" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/emailContentInput"
+        android:layout_width="363dp"
+        android:layout_height="335dp"
+        android:layout_below="@+id/emailContent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="21dp"
+        android:layout_marginEnd="28dp"
+        android:layout_marginRight="28dp"
+        android:layout_marginBottom="39dp"
+        android:hint="hint" />
+
+
+</RelativeLayout>
