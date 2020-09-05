@@ -2,10 +2,14 @@ package com.example.mailsapp;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
+
+import java.util.Calendar;
+import java.util.Date;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "email.db";
@@ -17,8 +21,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("create table user_table (ID INTEGER PRIMARY KEY AUTOINCREMENT, NAME TEXT, LASTNAME TEXT, EMAIL TEXT)");
-        db.execSQL("create table email_table (ID INTEGER PRIMARY KEY AUTOINCREMENT, EMAILFROM TEXT,SUBJECT TEXT, CONTENT TEXT, EMAILCC TEXT, DATETIME DATETIME)");
-        db.execSQL("create table sent_email_table (ID INTEGER PRIMARY KEY AUTOINCREMENT, EMAILTO TEXT,SUBJECT TEXT, CONTENT TEXT, EMAILCC TEXT, DATETIME DATETIME)");
+        db.execSQL("create table email_table (ID INTEGER PRIMARY KEY AUTOINCREMENT, EMAILFROM TEXT,SUBJECT TEXT, CONTENT TEXT, EMAILCC TEXT, DATETIME DATETIME DEFAULT CURRENT_TIMESTAMP)");
+        db.execSQL("create table sent_email_table (ID INTEGER PRIMARY KEY AUTOINCREMENT, EMAILTO TEXT,SUBJECT TEXT, CONTENT TEXT, EMAILCC TEXT, DATETIME DATETIME DEFAULT CURRENT_TIMESTAMP)");
         db.execSQL("create table folder_table (ID INTEGER PRIMARY KEY AUTOINCREMENT, NAME TEXT)");
     }
 
@@ -31,7 +35,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public boolean insertData(String emailTo, String emailSubject, String emailContent){
+    public boolean sendEmail(String emailTo, String emailSubject, String emailContent){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("emailTo", emailTo);
@@ -43,5 +47,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         else
             return true;
 
+    }
+
+    public Cursor getAllSentMails(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor res = db.rawQuery("SELECT * FROM SENT_EMAIL_TABLE", null);
+        return res;
     }
 }
