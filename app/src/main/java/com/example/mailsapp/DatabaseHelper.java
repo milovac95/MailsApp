@@ -29,7 +29,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public boolean insertData(String emailSubject, String emailTo, String emailContent){
+    public boolean insertData(String emailTo, String emailSubject, String emailContent){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("emailFrom", "milovac.business@gmail.com");

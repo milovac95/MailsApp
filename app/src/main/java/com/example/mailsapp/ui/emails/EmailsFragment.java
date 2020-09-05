@@ -12,12 +12,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
+import com.example.mailsapp.DatabaseHelper;
+import com.example.mailsapp.MainActivity;
 import com.example.mailsapp.R;
 
 public class EmailsFragment extends Fragment {
 
+    DatabaseHelper myDb;
+    EditText emailTo, emailSubject, emailContent;
+    Button btnSend;
     private EmailsViewModel mViewModel;
 
     public static EmailsFragment newInstance() {
@@ -29,20 +37,6 @@ public class EmailsFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.emails_fragment, container, false);
-//        View view = inflater.inflate(R.layout.emails_fragment, container, false);
-//        String[] menuItems = {"Do something",
-//                                "Do something else!",
-//                                "Do yet another thing"};
-//
-//        ListView listView = (ListView)view.findViewById(R.id.emailsListView);
-//
-//        ArrayAdapter<String> listViewAdapter = new ArrayAdapter<String>(
-//                getActivity(),
-//                android.R.layout.simple_list_item_1,
-//                menuItems
-//        );
-//        listView.setAdapter(listViewAdapter);
-//        return view;
     }
 
     @Override
@@ -52,4 +46,30 @@ public class EmailsFragment extends Fragment {
         // TODO: Use the ViewModel
     }
 
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        myDb = new DatabaseHelper(getActivity());
+        emailTo = (EditText) getView().findViewById(R.id.emailToInput);
+        emailSubject = (EditText) getView().findViewById(R.id.emailSubjectInput);
+        emailContent = (EditText) getView().findViewById(R.id.emailContentInput);
+        btnSend = (Button) getView().findViewById(R.id.btnSendEmail);
+        AddData();
+    }
+
+    public void AddData(){
+        btnSend.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        boolean isInserted = myDb.insertData(emailTo.getText().toString(), emailSubject.getText().toString(),
+                                emailContent.getText().toString());
+                        if(isInserted == true)
+                            Toast.makeText(getActivity(), "Data inserted", Toast.LENGTH_LONG).show();
+                        else
+                            Toast.makeText(getActivity(), "Data not inserted", Toast.LENGTH_LONG).show();
+                    }
+                }
+        );
+    }
 }
