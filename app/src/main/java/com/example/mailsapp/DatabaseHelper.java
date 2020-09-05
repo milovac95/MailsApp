@@ -17,7 +17,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("create table user_table (ID INTEGER PRIMARY KEY AUTOINCREMENT, NAME TEXT, LASTNAME TEXT, EMAIL TEXT)");
-        db.execSQL("create table email_table (ID INTEGER PRIMARY KEY AUTOINCREMENT, EMAILFROM TEXT, EMAILTO TEXT,SUBJECT TEXT, CONTENT TEXT, EMAILCC TEXT, DATETIME DATETIME)");
+        db.execSQL("create table email_table (ID INTEGER PRIMARY KEY AUTOINCREMENT, EMAILFROM TEXT,SUBJECT TEXT, CONTENT TEXT, EMAILCC TEXT, DATETIME DATETIME)");
+        db.execSQL("create table sent_email_table (ID INTEGER PRIMARY KEY AUTOINCREMENT, EMAILTO TEXT,SUBJECT TEXT, CONTENT TEXT, EMAILCC TEXT, DATETIME DATETIME)");
         db.execSQL("create table folder_table (ID INTEGER PRIMARY KEY AUTOINCREMENT, NAME TEXT)");
     }
 
@@ -26,17 +27,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS user_table");
         db.execSQL("DROP TABLE IF EXISTS email_table");
         db.execSQL("DROP TABLE IF EXISTS folder_table");
+        db.execSQL("DROP TABLE IF EXISTS sent_email_table");
         onCreate(db);
     }
 
     public boolean insertData(String emailTo, String emailSubject, String emailContent){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put("emailFrom", "milovac.business@gmail.com");
-        contentValues.put("emailFrom", emailSubject);
         contentValues.put("emailTo", emailTo);
+        contentValues.put("subject", emailSubject);
         contentValues.put("content", emailContent);
-        long result = db.insert("email_table",null, contentValues);
+        long result = db.insert("sent_email_table",null, contentValues);
         if(result == -1)
             return false;
         else
