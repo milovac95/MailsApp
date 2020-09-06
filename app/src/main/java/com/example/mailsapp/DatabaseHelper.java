@@ -24,6 +24,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("create table email_table ( _id INTEGER PRIMARY KEY AUTOINCREMENT, EMAILFROM TEXT,SUBJECT TEXT, CONTENT TEXT, EMAILCC TEXT, DATETIME DATETIME)");
         db.execSQL("create table sent_email_table ( _id INTEGER PRIMARY KEY AUTOINCREMENT, EMAILTO TEXT,SUBJECT TEXT, CONTENT TEXT, EMAILCC TEXT, DATETIME DATETIME)");
         db.execSQL("create table folder_table ( _id INTEGER PRIMARY KEY AUTOINCREMENT, NAME TEXT)");
+
+        db.execSQL("INSERT INTO email_table (emailfrom, subject, content, datetime) " +
+                "values ('marko@gmail.com', 'Pozdrav', 'Javljam se u vezi oglasa', 'Sun Aug 01 14:58:44 2020')," +
+                "('facebook@facebook.com', 'Notification', 'Bla bla bla', 'Sun Aug 04 14:58:44 2020')," +
+                "('petar@gmail.com', 'Pozdrav', 'Zovem povodom polovnog...', 'Fri Aug 16 11:58:44 2020')," +
+                "('someone@gmail.com', 'Pozdrav', 'Caoo, sta ima', 'Sun Aug 18 13:58:44 2020')," +
+                "('linkedin@linkedin.com', 'Pozdrav', 'Something important bla bla', 'Mon Sep 01 04:58:44 2020')," +
+                "('someone@gmail.com', 'Pozdrav', 'Hello, i woild like to..', 'Sat Sep 05 23:58:44 2020')");
     }
 
     @Override
@@ -54,6 +62,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public Cursor getAllSentMails(){
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor res = db.rawQuery("SELECT * FROM SENT_EMAIL_TABLE", null);
+        return res;
+    }
+
+    public Cursor getAllMails(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor res = db.rawQuery("SELECT * FROM EMAIL_TABLE", null);
         return res;
     }
 }

@@ -6,17 +6,17 @@ import android.view.View;
 import android.widget.ResourceCursorAdapter;
 import android.widget.TextView;
 
-public class SentMailCursorAdapter extends ResourceCursorAdapter{
+public class MailCursorAdapter extends ResourceCursorAdapter {
 
-    public SentMailCursorAdapter(Context context, int layout, Cursor cursor, int flags) {
+    public MailCursorAdapter(Context context, int layout, Cursor cursor, int flags) {
         super(context, layout, cursor, flags);
     }
 
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
 
-        TextView emailTo = (TextView) view.findViewById(R.id.list_item_email_to);
-        emailTo.setText(cursor.getString(1));
+        TextView emailFrom = (TextView) view.findViewById(R.id.list_item_email_to);
+        emailFrom.setText(cursor.getString(1));
 
         TextView emailSubject = (TextView) view.findViewById(R.id.list_item_email_subject);
         emailSubject.setText(cursor.getString(2));
