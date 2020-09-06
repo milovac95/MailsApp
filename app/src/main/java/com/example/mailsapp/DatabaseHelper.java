@@ -20,10 +20,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create table user_table ( ID INTEGER PRIMARY KEY AUTOINCREMENT, NAME TEXT, LASTNAME TEXT, EMAIL TEXT)");
-        db.execSQL("create table email_table ( ID INTEGER PRIMARY KEY AUTOINCREMENT, EMAILFROM TEXT,SUBJECT TEXT, CONTENT TEXT, EMAILCC TEXT, DATETIME DATETIME DEFAULT CURRENT_TIMESTAMP)");
-        db.execSQL("create table sent_email_table ( _id INTEGER PRIMARY KEY AUTOINCREMENT, EMAILTO TEXT,SUBJECT TEXT, CONTENT TEXT, EMAILCC TEXT, DATETIME DATETIME DEFAULT CURRENT_TIMESTAMP)");
-        db.execSQL("create table folder_table ( ID INTEGER PRIMARY KEY AUTOINCREMENT, NAME TEXT)");
+        db.execSQL("create table user_table ( _id INTEGER PRIMARY KEY AUTOINCREMENT, NAME TEXT, LASTNAME TEXT, EMAIL TEXT)");
+        db.execSQL("create table email_table ( _id INTEGER PRIMARY KEY AUTOINCREMENT, EMAILFROM TEXT,SUBJECT TEXT, CONTENT TEXT, EMAILCC TEXT, DATETIME DATETIME)");
+        db.execSQL("create table sent_email_table ( _id INTEGER PRIMARY KEY AUTOINCREMENT, EMAILTO TEXT,SUBJECT TEXT, CONTENT TEXT, EMAILCC TEXT, DATETIME DATETIME)");
+        db.execSQL("create table folder_table ( _id INTEGER PRIMARY KEY AUTOINCREMENT, NAME TEXT)");
     }
 
     @Override
@@ -36,11 +36,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     public boolean sendEmail(String emailTo, String emailSubject, String emailContent){
+        Date currentTime = Calendar.getInstance().getTime();
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("emailTo", emailTo);
         contentValues.put("subject", emailSubject);
         contentValues.put("content", emailContent);
+        contentValues.put("datetime", currentTime.toString());
         long result = db.insert("sent_email_table",null, contentValues);
         if(result == -1)
             return false;
