@@ -26,9 +26,6 @@ public class SentMailFragment extends Fragment {
 
     DatabaseHelper myDb;
     private SentMailViewModel mViewModel;
-    String emailTo[] = {"cao@gmail.com", "brate@ccc.com", "treci@mail.com"};
-    String emailSubject[] = {"Pozdrav", "Cao", "Blaaa"};
-    String emailContent[] = {"brateuuuu sta radis", "cao burazeee", "desi bre sta ima"};
 
     public static SentMailFragment newInstance() {
         return new SentMailFragment();

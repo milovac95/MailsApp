@@ -31,7 +31,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "('petar@gmail.com', 'Pozdrav', 'Zovem povodom polovnog...', 'Fri Aug 16 11:58:44 2020')," +
                 "('someone@gmail.com', 'Pozdrav', 'Caoo, sta ima', 'Sun Aug 18 13:58:44 2020')," +
                 "('linkedin@linkedin.com', 'Pozdrav', 'Something important bla bla', 'Mon Sep 01 04:58:44 2020')," +
-                "('someone@gmail.com', 'Pozdrav', 'Hello, i woild like to..', 'Sat Sep 05 23:58:44 2020')");
+                "('facebook@gmail.com', 'Hahha', 'Hahha, i woild like to..', 'Sat Sep 05 23:58:44 2020')," +
+                "('johndoe@gmail.com', 'Something', 'Would you like to buy..', 'Mon Sep 06 13:58:44 2020')," +
+                "('silvester@stalone.com', 'Hello', 'I am Balboa!', 'Sat Sep 07 12:58:44 2020')");
     }
 
     @Override
@@ -67,7 +69,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public Cursor getAllMails(){
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor res = db.rawQuery("SELECT * FROM EMAIL_TABLE", null);
-        return res;
+        Cursor mails = db.rawQuery("SELECT * FROM EMAIL_TABLE", null);
+        return mails;
     }
 }

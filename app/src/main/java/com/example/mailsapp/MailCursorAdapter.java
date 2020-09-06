@@ -15,16 +15,16 @@ public class MailCursorAdapter extends ResourceCursorAdapter {
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
 
-        TextView emailFrom = (TextView) view.findViewById(R.id.list_item_email_to);
+        TextView emailFrom = (TextView) view.findViewById(R.id.list_item_received_email_from);
         emailFrom.setText(cursor.getString(1));
 
-        TextView emailSubject = (TextView) view.findViewById(R.id.list_item_email_subject);
+        TextView emailSubject = (TextView) view.findViewById(R.id.list_item_received_email_subject);
         emailSubject.setText(cursor.getString(2));
 
-        TextView emailContent = (TextView) view.findViewById(R.id.list_item_email_content);
+        TextView emailContent = (TextView) view.findViewById(R.id.list_item_received_email_content);
         emailContent.setText(cursor.getString(3));
 
-        TextView emailDatetime = (TextView) view.findViewById(R.id.list_item_email_datetime);
+        TextView emailDatetime = (TextView) view.findViewById(R.id.list_item_received_email_datetime);
         emailDatetime.setText(cursor.getString(5));
     }
 }
