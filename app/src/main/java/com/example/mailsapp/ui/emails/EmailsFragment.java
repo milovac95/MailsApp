@@ -62,7 +62,7 @@ public class EmailsFragment extends Fragment {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        boolean isInserted = myDb.insertData(emailTo.getText().toString(), emailSubject.getText().toString(),
+                        boolean isInserted = myDb.sendEmail(emailTo.getText().toString(), emailSubject.getText().toString(),
                                 emailContent.getText().toString());
                         if(isInserted == true)
                             Toast.makeText(getActivity(), "Data inserted", Toast.LENGTH_LONG).show();
