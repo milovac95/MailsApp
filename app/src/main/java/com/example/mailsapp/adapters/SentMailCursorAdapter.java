@@ -1,10 +1,12 @@
-package com.example.mailsapp;
+package com.example.mailsapp.adapters;
 
 import android.content.Context;
 import android.database.Cursor;
 import android.view.View;
 import android.widget.ResourceCursorAdapter;
 import android.widget.TextView;
+
+import com.example.mailsapp.R;
 
 public class SentMailCursorAdapter extends ResourceCursorAdapter{
 
