@@ -5,37 +5,31 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
 
 import com.example.mailsapp.DatabaseHelper;
-import com.example.mailsapp.MailCursorAdapter;
+import com.example.mailsapp.adapters.MailCursorAdapter;
 import com.example.mailsapp.R;
-import com.example.mailsapp.SentMailCursorAdapter;
-import com.example.mailsapp.ui.sentmail.SentMailViewModel;
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements AdapterView.OnItemClickListener{
 
+    Cursor mails;
+    ListView mailList;
     DatabaseHelper myDb;
     private HomeViewModel homeViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-//        homeViewModel =
-//                ViewModelProviders.of(this).get(HomeViewModel.class);
-//
-//        View root = inflater.inflate(R.layout.fragment_home, container, false);
 
         myDb = new DatabaseHelper(getActivity());
         return inflater.inflate(R.layout.fragment_home, container, false);
 
-//        return root;
 
     }
 
@@ -44,10 +38,18 @@ public class HomeFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
         myDb = new DatabaseHelper(getActivity());
-        ListView mailList = (ListView) getActivity().findViewById(R.id.received_mail_list);
-        Cursor mails = myDb.getAllMails();
+        mailList = (ListView) getActivity().findViewById(R.id.received_mail_list);
+        mails = myDb.getAllMails();
         MailCursorAdapter mailCursorAdapter = new MailCursorAdapter(getActivity(), R.layout.mail_list_item, mails, 0);
         mailList.setAdapter(mailCursorAdapter);
+        mailList.setOnItemClickListener(this);
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        String itemId = mails.getString(0);
+        Toast.makeText(getActivity(), "Clicked ID:" + itemId, Toast.LENGTH_SHORT).show();
+
     }
 
 }

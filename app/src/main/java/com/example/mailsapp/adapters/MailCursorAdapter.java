@@ -1,10 +1,12 @@
-package com.example.mailsapp;
+package com.example.mailsapp.adapters;
 
 import android.content.Context;
 import android.database.Cursor;
 import android.view.View;
 import android.widget.ResourceCursorAdapter;
 import android.widget.TextView;
+
+import com.example.mailsapp.R;
 
 public class MailCursorAdapter extends ResourceCursorAdapter {
 
@@ -27,4 +29,5 @@ public class MailCursorAdapter extends ResourceCursorAdapter {
         TextView emailDatetime = (TextView) view.findViewById(R.id.list_item_received_email_datetime);
         emailDatetime.setText(cursor.getString(5));
     }
+
 }
