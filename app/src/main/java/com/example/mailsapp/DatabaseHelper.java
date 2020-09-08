@@ -62,14 +62,22 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     public Cursor getAllSentMails(){
-        SQLiteDatabase db = this.getWritableDatabase();
+        SQLiteDatabase db = this.getReadableDatabase();
         Cursor res = db.rawQuery("SELECT * FROM SENT_EMAIL_TABLE", null);
         return res;
     }
 
     public Cursor getAllMails(){
-        SQLiteDatabase db = this.getWritableDatabase();
+        SQLiteDatabase db = this.getReadableDatabase();
         Cursor mails = db.rawQuery("SELECT * FROM EMAIL_TABLE", null);
         return mails;
+    }
+
+    public Cursor getMailById(String id){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("SELECT * FROM EMAIL_TABLE WHERE _id=?", new String[]{
+                String.valueOf(id)
+        });
+        return res;
     }
 }
