@@ -1,5 +1,6 @@
 package com.example.mailsapp.ui.home;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,6 +15,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.mailsapp.DatabaseHelper;
+import com.example.mailsapp.MailSingleActivity;
 import com.example.mailsapp.adapters.MailCursorAdapter;
 import com.example.mailsapp.R;
 
@@ -48,7 +50,11 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemClickLis
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         String itemId = mails.getString(0);
-        Toast.makeText(getActivity(), "Clicked ID:" + itemId, Toast.LENGTH_SHORT).show();
+
+        Intent intent = new Intent(getActivity(), MailSingleActivity.class);
+        intent.putExtra("mailId", itemId);
+        startActivity(intent);
+
 
     }
 
