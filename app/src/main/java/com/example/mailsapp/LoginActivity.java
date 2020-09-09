@@ -15,6 +15,7 @@ public class LoginActivity extends AppCompatActivity {
     EditText email;
     EditText password;
     Button btnLogin;
+    DatabaseHelper myDb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,11 +38,20 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public boolean login() {
-        
-        if (email.getText().toString().equals("marko@mail.com") && password.getText().toString().equals("1234")) {
-            return true;
-        } else {
-            return false;
+        myDb = new DatabaseHelper(this);
+        Cursor users = myDb.getAllUsers();
+        boolean userFound = false;
+        try {
+            while (users.moveToNext()) {
+                if (email.getText().toString().equals(users.getString(3))
+                        && password.getText().toString().equals(users.getString(4))) {
+                    userFound = true;
+                }
+            }
+        } finally {
+            users.close();
         }
+
+        return userFound;
     }
 }

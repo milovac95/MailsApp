@@ -60,6 +60,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return mails;
     }
 
+    public Cursor getAllUsers(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor users = db.rawQuery("SELECT * FROM USER_TABLE", null);
+        return users;
+    }
+
     public Cursor getMailById(String id){
 
         SQLiteDatabase db = this.getReadableDatabase();
