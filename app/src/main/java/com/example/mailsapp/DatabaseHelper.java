@@ -80,4 +80,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         res.moveToFirst();
         return res;
     }
+
+    public Cursor getSentMailById(String id){
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("SELECT * FROM SENT_EMAIL_TABLE WHERE _id = " + id, null);
+        res.moveToFirst();
+        return res;
+    }
 }
