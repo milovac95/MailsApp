@@ -15,6 +15,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mailsapp.DatabaseHelper;
@@ -36,7 +37,17 @@ public class EmailsFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.emails_fragment, container, false);
+
+        final View rootView = inflater.inflate(R.layout.emails_fragment, container, false);
+        Bundle bundle = this.getArguments();
+        if (bundle != null) {
+            EditText emailTo = (EditText) rootView.findViewById(R.id.emailToInput);
+            emailTo.setText(bundle.getString("mailTo"));
+            EditText emailSubject = (EditText) rootView.findViewById(R.id.emailSubjectInput);
+            emailSubject.setText(bundle.getString("mailSubject"));
+        }
+        return rootView;
+
     }
 
     @Override
