@@ -34,7 +34,5 @@ public class MailSingleActivity extends AppCompatActivity {
 
         TextView emailDatetime = (TextView) this.findViewById(R.id.single_received_email_datetime);
         emailDatetime.setText(mail.getString(5));
-
-        Toast.makeText(this, "Clicked ID:" + mailId, Toast.LENGTH_SHORT).show();
     }
 }

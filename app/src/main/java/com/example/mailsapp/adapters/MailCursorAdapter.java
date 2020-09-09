@@ -24,7 +24,12 @@ public class MailCursorAdapter extends ResourceCursorAdapter {
         emailSubject.setText(cursor.getString(2));
 
         TextView emailContent = (TextView) view.findViewById(R.id.list_item_received_email_content);
-        emailContent.setText(cursor.getString(3));
+        String fullContent = cursor.getString(3);
+        if(fullContent.length() > 100){
+            emailContent.setText(fullContent.substring(0,100) + "...");
+        }else {
+            emailContent.setText(fullContent);
+        }
 
         TextView emailDatetime = (TextView) view.findViewById(R.id.list_item_received_email_datetime);
         emailDatetime.setText(cursor.getString(5));

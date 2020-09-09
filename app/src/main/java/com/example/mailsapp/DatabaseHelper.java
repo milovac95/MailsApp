@@ -26,7 +26,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("create table folder_table ( _id INTEGER PRIMARY KEY AUTOINCREMENT, NAME TEXT)");
 
         db.execSQL("INSERT INTO email_table (emailfrom, subject, content, datetime) " +
-                "values ('marko@gmail.com', 'Pozdrav', 'Javljam se u vezi oglasa', 'Sun Aug 01 14:58:44 2020')," +
+                "values ('marko@gmail.com', 'Pozdrav', 'Javljam se u vezi oglasa bla bla bla bla bla bla bla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla bla', 'Sun Aug 01 14:58:44 2020')," +
                 "('facebook@facebook.com', 'Notification', 'Bla bla bla', 'Sun Aug 04 14:58:44 2020')," +
                 "('petar@gmail.com', 'Pozdrav', 'Zovem povodom polovnog...', 'Fri Aug 16 11:58:44 2020')," +
                 "('someone@gmail.com', 'Pozdrav', 'Caoo, sta ima', 'Sun Aug 18 13:58:44 2020')," +
@@ -74,10 +74,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     public Cursor getMailById(String id){
+
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("SELECT * FROM EMAIL_TABLE WHERE _id=?", new String[]{
-                String.valueOf(id)
-        });
+        Cursor res = db.rawQuery("SELECT * FROM EMAIL_TABLE WHERE _id = " + id, null);
+        res.moveToFirst();
         return res;
     }
 }
