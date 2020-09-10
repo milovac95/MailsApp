@@ -67,6 +67,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return users;
     }
 
+    public Cursor getAllContacts(String userId){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor users = db.rawQuery("SELECT * FROM CONTACT_TABLE WHERE USERID =" + userId, null);
+        return users;
+    }
+
     public Cursor getMailById(String id){
 
         SQLiteDatabase db = this.getReadableDatabase();
@@ -89,6 +95,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("create table email_table ( _id INTEGER PRIMARY KEY AUTOINCREMENT, EMAILFROM TEXT,SUBJECT TEXT, CONTENT TEXT, EMAILCC TEXT, DATETIME DATETIME, USERID TEXT)");
         db.execSQL("create table sent_email_table ( _id INTEGER PRIMARY KEY AUTOINCREMENT, EMAILTO TEXT,SUBJECT TEXT, CONTENT TEXT, EMAILCC TEXT, DATETIME DATETIME, USERID TEXT)");
         db.execSQL("create table folder_table ( _id INTEGER PRIMARY KEY AUTOINCREMENT, NAME TEXT)");
+        db.execSQL("create table contact_table ( _id INTEGER PRIMARY KEY AUTOINCREMENT, NAME TEXT, LASTNAME TEXT, EMAIL TEXT, USERID TEXT)");
 
         db.execSQL("INSERT INTO email_table (emailfrom, subject, content, datetime, userid) " +
                 "values ('marko@gmail.com', 'Pozdrav', 'Javljam se u vezi oglasa bla bla bla bla bla bla bla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla bla', 'Sun Aug 01 14:58:44 2020', '1')," +
@@ -104,5 +111,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "values ('Marko', 'Milovac', 'marko@mail.com', '1234')," +
                 "('Silvester', 'Stalone', 'stalone@mail.com', '1234')," +
                 "('Arnold', 'Schwarzenegger', 'arnold@mail.com', '1234')");
+
+        db.execSQL("INSERT INTO contact_table (name, lastname, email, userid) " +
+                "values ('John', 'Doe', 'johndoe@mail.com', '1')," +
+                "('Novak', 'Djokovic', 'nole@mail.com', '1')," +
+                "('FTN', 'Sluzba', 'ssluzbaftn@uns.ac.rs', '1')");
     }
 }
