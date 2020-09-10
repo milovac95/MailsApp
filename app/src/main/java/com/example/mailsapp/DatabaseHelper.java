@@ -104,6 +104,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return res;
     }
 
+    public Cursor getContactById(String id){
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor contact = db.rawQuery("SELECT * FROM CONTACT_TABLE WHERE _id = " + id, null);
+        contact.moveToFirst();
+        return contact;
+    }
+
     private void initDB(SQLiteDatabase db){
 
         db.execSQL("create table user_table ( _id INTEGER PRIMARY KEY AUTOINCREMENT, NAME TEXT, LASTNAME TEXT, EMAIL TEXT, PASSWORD TEXT)");

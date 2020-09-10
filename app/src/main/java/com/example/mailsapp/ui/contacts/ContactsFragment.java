@@ -17,6 +17,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 
+import com.example.mailsapp.ContactSingle;
 import com.example.mailsapp.DatabaseHelper;
 import com.example.mailsapp.LoginActivity;
 import com.example.mailsapp.MainActivity;
@@ -69,8 +70,8 @@ public class ContactsFragment extends Fragment implements AdapterView.OnItemClic
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         String contactId = contacts.getString(0);
 
-        Intent intent = new Intent(getActivity(), MainActivity.class);
-        Preferences.setPreferencesUserId(getActivity(), contactId);
+        Intent intent = new Intent(getActivity(), ContactSingle.class);
+        intent.putExtra("contactId", contactId);
         startActivity(intent);
     }
 }
