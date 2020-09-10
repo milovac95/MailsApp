@@ -20,12 +20,14 @@ import android.widget.Toast;
 
 import com.example.mailsapp.DatabaseHelper;
 import com.example.mailsapp.MainActivity;
+import com.example.mailsapp.Preferences;
 import com.example.mailsapp.R;
 
 public class EmailsFragment extends Fragment {
 
     DatabaseHelper myDb;
     EditText emailTo, emailSubject, emailContent;
+    String userId;
     Button btnSend;
     private EmailsViewModel mViewModel;
 
@@ -64,6 +66,7 @@ public class EmailsFragment extends Fragment {
         emailTo = (EditText) getView().findViewById(R.id.emailToInput);
         emailSubject = (EditText) getView().findViewById(R.id.emailSubjectInput);
         emailContent = (EditText) getView().findViewById(R.id.emailContentInput);
+        userId = Preferences.getPreferencesUserId(getActivity());
         btnSend = (Button) getView().findViewById(R.id.btnSendEmail);
         AddData();
     }
@@ -74,7 +77,7 @@ public class EmailsFragment extends Fragment {
                     @Override
                     public void onClick(View view) {
                         boolean isInserted = myDb.sendEmail(emailTo.getText().toString(), emailSubject.getText().toString(),
-                                emailContent.getText().toString());
+                                emailContent.getText().toString(), userId);
                         if(isInserted == true)
                             Toast.makeText(getActivity(), "Data inserted", Toast.LENGTH_LONG).show();
                         else
