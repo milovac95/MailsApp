@@ -16,6 +16,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.mailsapp.DatabaseHelper;
 import com.example.mailsapp.MailSingleActivity;
+import com.example.mailsapp.Preferences;
 import com.example.mailsapp.adapters.MailCursorAdapter;
 import com.example.mailsapp.R;
 
@@ -41,7 +42,8 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemClickLis
 
         myDb = new DatabaseHelper(getActivity());
         mailList = (ListView) getActivity().findViewById(R.id.received_mail_list);
-        mails = myDb.getAllMails();
+        String userId = Preferences.getPreferencesUserId(getActivity());
+        mails = myDb.getAllMails(userId);
         MailCursorAdapter mailCursorAdapter = new MailCursorAdapter(getActivity(), R.layout.mail_list_item, mails, 0);
         mailList.setAdapter(mailCursorAdapter);
         mailList.setOnItemClickListener(this);

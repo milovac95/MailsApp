@@ -18,6 +18,7 @@ import android.widget.ListView;
 
 import com.example.mailsapp.DatabaseHelper;
 import com.example.mailsapp.MailSingleActivity;
+import com.example.mailsapp.Preferences;
 import com.example.mailsapp.R;
 import com.example.mailsapp.adapters.SentMailCursorAdapter;
 
@@ -45,7 +46,8 @@ public class SentMailFragment extends Fragment implements AdapterView.OnItemClic
         super.onActivityCreated(savedInstanceState);
         mViewModel = ViewModelProviders.of(this).get(SentMailViewModel.class);
         ListView sentEmailList = (ListView) getActivity().findViewById(R.id.sent_mail_list);
-        mails= myDb.getAllSentMails();
+        String userId = Preferences.getPreferencesUserId(getActivity());
+        mails= myDb.getAllSentMails(userId);
         SentMailCursorAdapter sentMailCursorAdapter = new SentMailCursorAdapter(getActivity(), R.layout.sent_mail_list_item, mails, 0);
         sentEmailList.setAdapter(sentMailCursorAdapter);
         sentEmailList.setOnItemClickListener(this);

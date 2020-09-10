@@ -3,6 +3,7 @@ package com.example.mailsapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
@@ -16,6 +17,7 @@ public class LoginActivity extends AppCompatActivity {
     EditText password;
     Button btnLogin;
     DatabaseHelper myDb;
+    String userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +31,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(login()){
+                    Preferences.setPreferencesUserId(getApplicationContext(), userId);
                     startActivity(new Intent(LoginActivity.this, MainActivity.class));
                     finish();
                 }
@@ -46,6 +49,7 @@ public class LoginActivity extends AppCompatActivity {
                 if (email.getText().toString().equals(users.getString(3))
                         && password.getText().toString().equals(users.getString(4))) {
                     userFound = true;
+                    userId = users.getString(0);
                 }
             }
         } finally {
