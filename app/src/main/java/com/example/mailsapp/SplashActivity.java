@@ -19,7 +19,7 @@ public class SplashActivity extends Activity {
         new Timer().schedule(new TimerTask() {
             @Override
             public void run() {
-                startActivity(new Intent(SplashActivity.this, MainActivity.class));
+                startActivity(new Intent(SplashActivity.this, LoginActivity.class));
                 finish(); // da nebi mogao da ode back na splash
             }
         }, SPLASH_TIME_OUT);

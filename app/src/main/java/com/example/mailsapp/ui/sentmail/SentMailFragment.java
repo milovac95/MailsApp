@@ -2,6 +2,7 @@ package com.example.mailsapp.ui.sentmail;
 
 import androidx.lifecycle.ViewModelProviders;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 
@@ -12,14 +13,17 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.example.mailsapp.DatabaseHelper;
+import com.example.mailsapp.MailSingleActivity;
 import com.example.mailsapp.R;
 import com.example.mailsapp.adapters.SentMailCursorAdapter;
 
-public class SentMailFragment extends Fragment {
+public class SentMailFragment extends Fragment implements AdapterView.OnItemClickListener {
 
+    Cursor mails;
     DatabaseHelper myDb;
     private SentMailViewModel mViewModel;
 
@@ -41,9 +45,20 @@ public class SentMailFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         mViewModel = ViewModelProviders.of(this).get(SentMailViewModel.class);
         ListView sentEmailList = (ListView) getActivity().findViewById(R.id.sent_mail_list);
-        Cursor res = myDb.getAllSentMails();
-        SentMailCursorAdapter sentMailCursorAdapter = new SentMailCursorAdapter(getActivity(), R.layout.sent_mail_list_item, res, 0);
+        mails= myDb.getAllSentMails();
+        SentMailCursorAdapter sentMailCursorAdapter = new SentMailCursorAdapter(getActivity(), R.layout.sent_mail_list_item, mails, 0);
         sentEmailList.setAdapter(sentMailCursorAdapter);
+        sentEmailList.setOnItemClickListener(this);
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        String itemId = mails.getString(0);
+
+        Intent intent = new Intent(getActivity(), MailSingleActivity.class);
+        intent.putExtra("mailId", itemId);
+        intent.putExtra("sentmail", 1);
+        startActivity(intent);
     }
 
 }

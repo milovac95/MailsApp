@@ -25,9 +25,18 @@ public class MailSingleActivity extends AppCompatActivity {
         setContentView(R.layout.activity_mail_single);
 
         final String mailId = getIntent().getStringExtra("mailId");
+        final int sent = getIntent().getIntExtra("sentmail", 0);
 
         myDb = new DatabaseHelper(this);
-        mail = myDb.getMailById(mailId);
+
+        if(sent == 1){
+            mail = myDb.getSentMailById(mailId);
+        }else{
+            mail = myDb.getMailById(mailId);
+        }
+
+
+
 
         FillMailSingleScreen(mail);
 
