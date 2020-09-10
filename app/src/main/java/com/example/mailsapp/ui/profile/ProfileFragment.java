@@ -14,9 +14,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 
 import com.example.mailsapp.DatabaseHelper;
+import com.example.mailsapp.Emails;
+import com.example.mailsapp.LoginActivity;
 import com.example.mailsapp.MailSingleActivity;
 import com.example.mailsapp.MainActivity;
 import com.example.mailsapp.Preferences;
@@ -27,6 +30,7 @@ import com.example.mailsapp.adapters.UserCursorAdapter;
 public class ProfileFragment extends Fragment implements AdapterView.OnItemClickListener{
     Cursor users;
     DatabaseHelper myDb;
+    Button btnLogout;
     private ProfileViewModel mViewModel;
 
     public static ProfileFragment newInstance() {
@@ -50,6 +54,17 @@ public class ProfileFragment extends Fragment implements AdapterView.OnItemClick
         UserCursorAdapter userCursorAdapter = new UserCursorAdapter(getActivity(), R.layout.profile_list_item, users, 0);
         profileList.setAdapter(userCursorAdapter);
         profileList.setOnItemClickListener(this);
+
+        btnLogout = (Button) getActivity().findViewById(R.id.btn_logout);
+        btnLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Preferences.clearUser(getActivity());
+                Intent intent = new Intent(getActivity(), LoginActivity.class);
+                startActivity(intent);
+                getActivity().finish();
+            }
+        });
     }
 
     @Override
