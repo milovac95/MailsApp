@@ -18,7 +18,9 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import com.example.mailsapp.DatabaseHelper;
+import com.example.mailsapp.LoginActivity;
 import com.example.mailsapp.MainActivity;
+import com.example.mailsapp.NewContact;
 import com.example.mailsapp.Preferences;
 import com.example.mailsapp.R;
 import com.example.mailsapp.adapters.ContactCursorAdapter;
@@ -28,7 +30,7 @@ public class ContactsFragment extends Fragment implements AdapterView.OnItemClic
 
     Cursor contacts;
     DatabaseHelper myDb;
-    Button btnLogout;
+    Button btnCreateNew;
     private ContactsViewModel mViewModel;
 
     public static ContactsFragment newInstance() {
@@ -53,6 +55,15 @@ public class ContactsFragment extends Fragment implements AdapterView.OnItemClic
         ContactCursorAdapter contactCursorAdapter = new ContactCursorAdapter(getActivity(), R.layout.contact_list_item, contacts, 0);
         contactList.setAdapter(contactCursorAdapter);
         contactList.setOnItemClickListener(this);
+
+        btnCreateNew = (Button) getActivity().findViewById(R.id.btn_new_contact);
+        btnCreateNew.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), NewContact.class);
+                startActivity(intent);
+            }
+        });
     }
 
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

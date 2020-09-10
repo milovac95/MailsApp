@@ -49,6 +49,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     }
 
+    public boolean addContact(String name, String lastname, String email, String userId){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("name", name);
+        contentValues.put("lastname", lastname);
+        contentValues.put("email", email);
+        contentValues.put("userid", userId);
+        long result = db.insert("contact_table",null, contentValues);
+        if(result == -1)
+            return false;
+        else
+            return true;
+
+    }
+
     public Cursor getAllSentMails(String userId){
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res = db.rawQuery("SELECT * FROM SENT_EMAIL_TABLE WHERE USERID =" + userId, null);
