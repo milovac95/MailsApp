@@ -18,6 +18,7 @@ public class LoginActivity extends AppCompatActivity {
     Button btnLogin;
     DatabaseHelper myDb;
     String userId;
+    String userEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +33,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if(login()){
                     Preferences.setPreferencesUserId(getApplicationContext(), userId);
+                    Preferences.setPreferencesUserEmail(getApplicationContext(), userEmail);
                     startActivity(new Intent(LoginActivity.this, MainActivity.class));
                     finish();
                 }
@@ -50,6 +52,7 @@ public class LoginActivity extends AppCompatActivity {
                         && password.getText().toString().equals(users.getString(4))) {
                     userFound = true;
                     userId = users.getString(0);
+                    userEmail = users.getString(3);
                 }
             }
         } finally {

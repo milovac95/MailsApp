@@ -18,6 +18,9 @@ public class MailSingleActivity extends AppCompatActivity {
     Cursor mail;
     DatabaseHelper myDb;
     Button btnReplyMail, btnForwardMail;
+    String textMailFrom;
+    String textMailTo;
+    Integer isSent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,11 +33,11 @@ public class MailSingleActivity extends AppCompatActivity {
         myDb = new DatabaseHelper(this);
 
         if(sent == 1){
-            mail = myDb.getSentMailById(mailId);
+            isSent = 1;
         }else{
-            mail = myDb.getMailById(mailId);
+            isSent = 0;
         }
-
+        mail = myDb.getMailById(mailId);
 
 
 
@@ -46,11 +49,16 @@ public class MailSingleActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                String mailTo = mail.getString(1);
+                if(isSent == 1){
+                    textMailTo = mail.getString(6);
+                }else {
+                    textMailTo = mail.getString(1);
+                }
+
                 String mailSubject = mail.getString(2);
 
                 Intent intent = new Intent(MailSingleActivity.this, Emails.class);
-                intent.putExtra("mailTo", mailTo);
+                intent.putExtra("mailTo", textMailTo);
                 intent.putExtra("mailSubject", mailSubject);
                 intent.putExtra("mailContent", "");
                 startActivity(intent);
@@ -76,8 +84,14 @@ public class MailSingleActivity extends AppCompatActivity {
 
     public void FillMailSingleScreen(Cursor mail){
 
+        if(isSent == 1){
+            textMailFrom = mail.getString(6);
+        }else {
+            textMailFrom = mail.getString(1);
+        }
+
         TextView emailFrom = (TextView) this.findViewById(R.id.single_received_email_from);
-        emailFrom.setText(mail.getString(1));
+        emailFrom.setText(textMailFrom);
 
         TextView emailSubject = (TextView) this.findViewById(R.id.single_received_email_subject);
         emailSubject.setText(mail.getString(2));

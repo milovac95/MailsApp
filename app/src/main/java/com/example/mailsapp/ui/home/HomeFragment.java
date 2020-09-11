@@ -42,8 +42,8 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemClickLis
 
         myDb = new DatabaseHelper(getActivity());
         mailList = (ListView) getActivity().findViewById(R.id.received_mail_list);
-        String userId = Preferences.getPreferencesUserId(getActivity());
-        mails = myDb.getAllMails(userId);
+        String userEmail = Preferences.getPreferencesUserEmail(getActivity());
+        mails = myDb.getAllMails(userEmail);
         MailCursorAdapter mailCursorAdapter = new MailCursorAdapter(getActivity(), R.layout.mail_list_item, mails, 0);
         mailList.setAdapter(mailCursorAdapter);
         mailList.setOnItemClickListener(this);

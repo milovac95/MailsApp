@@ -18,7 +18,7 @@ public class SentMailCursorAdapter extends ResourceCursorAdapter{
     public void bindView(View view, Context context, Cursor cursor) {
 
         TextView emailTo = (TextView) view.findViewById(R.id.list_item_email_to);
-        emailTo.setText(cursor.getString(1));
+        emailTo.setText(cursor.getString(6));
 
         TextView emailSubject = (TextView) view.findViewById(R.id.list_item_email_subject);
         emailSubject.setText(cursor.getString(2));
