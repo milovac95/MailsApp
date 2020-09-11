@@ -64,6 +64,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     }
 
+    public boolean addFolder(String name, String userId){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("name", name);
+        contentValues.put("userid", userId);
+        long result = db.insert("folder_table",null, contentValues);
+        if(result == -1)
+            return false;
+        else
+            return true;
+
+    }
+
     public Cursor getAllSentMails(String emailFrom){
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res = db.rawQuery("SELECT * FROM EMAIL_TABLE WHERE EMAILFROM ='" + emailFrom + "'", null);

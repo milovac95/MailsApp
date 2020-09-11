@@ -19,6 +19,7 @@ import android.widget.ListView;
 
 import com.example.mailsapp.ContactSingle;
 import com.example.mailsapp.DatabaseHelper;
+import com.example.mailsapp.FolderNew;
 import com.example.mailsapp.NewContact;
 import com.example.mailsapp.Preferences;
 import com.example.mailsapp.R;
@@ -59,7 +60,7 @@ public class FoldersFragment extends Fragment implements AdapterView.OnItemClick
         btnCreateNew.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), NewContact.class);
+                Intent intent = new Intent(getActivity(), FolderNew.class);
                 startActivity(intent);
             }
         });
