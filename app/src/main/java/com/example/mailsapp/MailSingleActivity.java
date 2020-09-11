@@ -17,7 +17,7 @@ public class MailSingleActivity extends AppCompatActivity {
 
     Cursor mail;
     DatabaseHelper myDb;
-    Button btnReplyMail;
+    Button btnReplyMail, btnForwardMail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +41,7 @@ public class MailSingleActivity extends AppCompatActivity {
         FillMailSingleScreen(mail);
 
         btnReplyMail = (Button) findViewById(R.id.btn_reply);
+        btnForwardMail = (Button) findViewById(R.id.btn_forward_mail);
         btnReplyMail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -51,6 +52,22 @@ public class MailSingleActivity extends AppCompatActivity {
                 Intent intent = new Intent(MailSingleActivity.this, Emails.class);
                 intent.putExtra("mailTo", mailTo);
                 intent.putExtra("mailSubject", mailSubject);
+                intent.putExtra("mailContent", "");
+                startActivity(intent);
+            }
+        });
+
+        btnForwardMail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String mailContent = mail.getString(3);
+                String mailSubject = mail.getString(2);
+
+                Intent intent = new Intent(MailSingleActivity.this, Emails.class);
+                intent.putExtra("mailContent", mailContent);
+                intent.putExtra("mailSubject", mailSubject);
+                intent.putExtra("mailTo", "");
                 startActivity(intent);
             }
         });

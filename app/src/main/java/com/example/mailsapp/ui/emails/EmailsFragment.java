@@ -47,6 +47,8 @@ public class EmailsFragment extends Fragment {
             emailTo.setText(bundle.getString("mailTo"));
             EditText emailSubject = (EditText) rootView.findViewById(R.id.emailSubjectInput);
             emailSubject.setText(bundle.getString("mailSubject"));
+            EditText emailContent = (EditText) rootView.findViewById(R.id.emailContentInput);
+            emailContent.setText(bundle.getString("mailContent"));
         }
         return rootView;
 

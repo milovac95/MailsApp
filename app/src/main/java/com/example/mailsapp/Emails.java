@@ -19,12 +19,14 @@ public class Emails extends AppCompatActivity {
         setContentView(R.layout.emails_activity);
         final String mailTo = getIntent().getStringExtra("mailTo");
         final String mailSubject = getIntent().getStringExtra("mailSubject");
+        final String mailContent = getIntent().getStringExtra("mailContent");
 
         if(getIntent() != null){
 
             Bundle bundle = new Bundle();
             bundle.putString("mailTo", mailTo);
             bundle.putString("mailSubject", mailSubject);
+            bundle.putString("mailContent", mailContent);
 
             EmailsFragment emailsFragment = new EmailsFragment();
             emailsFragment.setArguments(bundle);
