@@ -112,6 +112,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return contact;
     }
 
+    public Cursor editContactById(String name, String lastname, String email, String id){
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor contact = db.rawQuery("UPDATE CONTACT_TABLE SET NAME = '" + name + "', " +
+                "LASTNAME = '" + lastname + "', EMAIL = '" + email + "'  WHERE _id = " + id, null);
+        contact.moveToFirst();
+        return contact;
+    }
+
     public Cursor deleteContactById(String id){
 
         SQLiteDatabase db = this.getWritableDatabase();
