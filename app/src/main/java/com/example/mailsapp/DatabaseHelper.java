@@ -88,6 +88,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return users;
     }
 
+    public Cursor getAllFolders(String userId){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor folders = db.rawQuery("SELECT * FROM FOLDER_TABLE WHERE USERID =" + userId, null);
+        return folders;
+    }
+
     public Cursor getMailById(String id){
 
         SQLiteDatabase db = this.getReadableDatabase();
@@ -134,7 +140,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("create table user_table ( _id INTEGER PRIMARY KEY AUTOINCREMENT, NAME TEXT, LASTNAME TEXT, EMAIL TEXT, PASSWORD TEXT)");
         db.execSQL("create table email_table ( _id INTEGER PRIMARY KEY AUTOINCREMENT, EMAILFROM TEXT,SUBJECT TEXT, CONTENT TEXT, EMAILCC TEXT, DATETIME DATETIME, EMAILTO TEXT)");
         //db.execSQL("create table sent_email_table ( _id INTEGER PRIMARY KEY AUTOINCREMENT, EMAILTO TEXT,SUBJECT TEXT, CONTENT TEXT, EMAILCC TEXT, DATETIME DATETIME, USERID TEXT)");
-        db.execSQL("create table folder_table ( _id INTEGER PRIMARY KEY AUTOINCREMENT, NAME TEXT)");
+        db.execSQL("create table folder_table ( _id INTEGER PRIMARY KEY AUTOINCREMENT, NAME TEXT, USERID TEXT)");
         db.execSQL("create table contact_table ( _id INTEGER PRIMARY KEY AUTOINCREMENT, NAME TEXT, LASTNAME TEXT, EMAIL TEXT, USERID TEXT)");
 
         db.execSQL("INSERT INTO email_table (emailfrom, subject, content, datetime, emailto) " +
@@ -156,5 +162,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "values ('John', 'Doe', 'johndoe@mail.com', '1')," +
                 "('Novak', 'Djokovic', 'nole@mail.com', '1')," +
                 "('FTN', 'Sluzba', 'ssluzbaftn@uns.ac.rs', '1')");
+
+        db.execSQL("INSERT INTO folder_table (name, userid) values ('Spam', '1'), ('Important', '1')");
     }
 }
