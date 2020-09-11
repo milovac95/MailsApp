@@ -17,7 +17,7 @@ public class MailSingleActivity extends AppCompatActivity {
 
     Cursor mail;
     DatabaseHelper myDb;
-    Button btnReplyMail, btnForwardMail;
+    Button btnReplyMail, btnForwardMail, btnDeleteMail;
     String textMailFrom;
     String textMailTo;
     Integer isSent;
@@ -45,6 +45,7 @@ public class MailSingleActivity extends AppCompatActivity {
 
         btnReplyMail = (Button) findViewById(R.id.btn_reply);
         btnForwardMail = (Button) findViewById(R.id.btn_forward_mail);
+        btnDeleteMail = (Button) findViewById(R.id.btn_delete_single_mail);
         btnReplyMail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -76,6 +77,17 @@ public class MailSingleActivity extends AppCompatActivity {
                 intent.putExtra("mailContent", mailContent);
                 intent.putExtra("mailSubject", mailSubject);
                 intent.putExtra("mailTo", "");
+                startActivity(intent);
+            }
+        });
+
+        btnDeleteMail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String mailId = mail.getString(0);
+                myDb.deleteMailById(mailId);
+                Intent intent = new Intent(MailSingleActivity.this, MainActivity.class);
                 startActivity(intent);
             }
         });

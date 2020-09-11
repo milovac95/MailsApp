@@ -154,6 +154,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return contactDeleted;
     }
 
+    public Cursor deleteMailById(String id){
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor emailDeleted = db.rawQuery("DELETE FROM EMAIL_TABLE WHERE _id = " + id, null);
+        emailDeleted.moveToFirst();
+        return emailDeleted;
+    }
+
     private void initDB(SQLiteDatabase db){
 
         db.execSQL("create table user_table ( _id INTEGER PRIMARY KEY AUTOINCREMENT, NAME TEXT, LASTNAME TEXT, EMAIL TEXT, PASSWORD TEXT)");
