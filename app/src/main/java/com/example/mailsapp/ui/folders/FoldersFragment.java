@@ -20,6 +20,7 @@ import android.widget.ListView;
 import com.example.mailsapp.ContactSingle;
 import com.example.mailsapp.DatabaseHelper;
 import com.example.mailsapp.FolderNew;
+import com.example.mailsapp.FolderSingle;
 import com.example.mailsapp.NewContact;
 import com.example.mailsapp.Preferences;
 import com.example.mailsapp.R;
@@ -70,7 +71,7 @@ public class FoldersFragment extends Fragment implements AdapterView.OnItemClick
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         String folderId = folders.getString(0);
 
-        Intent intent = new Intent(getActivity(), ContactSingle.class);
+        Intent intent = new Intent(getActivity(), FolderSingle.class);
         intent.putExtra("folderId", folderId);
         startActivity(intent);
     }

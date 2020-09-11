@@ -89,6 +89,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return mails;
     }
 
+    public Cursor getAllFolderEmails(String folderId, String userEmail){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor folderMails = db.rawQuery("SELECT * FROM EMAIL_TABLE WHERE (EMAILTO = '" + userEmail + "' AND FOLDERID = " + folderId + ")" , null);
+        return folderMails;
+    }
+
     public Cursor getAllUsers(){
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor users = db.rawQuery("SELECT * FROM USER_TABLE", null);
@@ -151,20 +157,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private void initDB(SQLiteDatabase db){
 
         db.execSQL("create table user_table ( _id INTEGER PRIMARY KEY AUTOINCREMENT, NAME TEXT, LASTNAME TEXT, EMAIL TEXT, PASSWORD TEXT)");
-        db.execSQL("create table email_table ( _id INTEGER PRIMARY KEY AUTOINCREMENT, EMAILFROM TEXT,SUBJECT TEXT, CONTENT TEXT, EMAILCC TEXT, DATETIME DATETIME, EMAILTO TEXT)");
+        db.execSQL("create table email_table ( _id INTEGER PRIMARY KEY AUTOINCREMENT, EMAILFROM TEXT,SUBJECT TEXT, CONTENT TEXT, EMAILCC TEXT, DATETIME DATETIME, EMAILTO TEXT, FOLDERID TEXT)");
         //db.execSQL("create table sent_email_table ( _id INTEGER PRIMARY KEY AUTOINCREMENT, EMAILTO TEXT,SUBJECT TEXT, CONTENT TEXT, EMAILCC TEXT, DATETIME DATETIME, USERID TEXT)");
         db.execSQL("create table folder_table ( _id INTEGER PRIMARY KEY AUTOINCREMENT, NAME TEXT, USERID TEXT)");
         db.execSQL("create table contact_table ( _id INTEGER PRIMARY KEY AUTOINCREMENT, NAME TEXT, LASTNAME TEXT, EMAIL TEXT, USERID TEXT)");
 
-        db.execSQL("INSERT INTO email_table (emailfrom, subject, content, datetime, emailto) " +
-                "values ('marko@mail.com', 'Pozdrav', 'Javljam se u vezi oglasa bla bla bla bla bla bla bla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla bla', 'Sun Aug 01 14:58:44 2020', 'stalone@mail.com')," +
-                "('facebook@facebook.com', 'Notification', 'Bla bla bla', 'Sun Aug 04 14:58:44 2020', 'marko@mail.com')," +
-                "('petar@gmail.com', 'Pozdrav', 'Zovem povodom polovnog...', 'Fri Aug 16 11:58:44 2020','marko@mail.com')," +
-                "('someone@gmail.com', 'Pozdrav', 'Caoo, sta ima', 'Sun Aug 18 13:58:44 2020','marko@mail.com')," +
-                "('linkedin@linkedin.com', 'Pozdrav', 'Something important bla bla', 'Mon Sep 01 04:58:44 2020','marko@mail.com')," +
-                "('facebook@gmail.com', 'Hahha', 'Hahha, i woild like to..', 'Sat Sep 05 23:58:44 2020','stalone@mail.com')," +
-                "('johndoe@gmail.com', 'Something', 'Would you like to buy..', 'Mon Sep 06 13:58:44 2020','stalone@mail.com')," +
-                "('silvester@stalone.com', 'Hello', 'I am Balboa!', 'Sat Sep 07 12:58:44 2020','arnold@mail.com')");
+        db.execSQL("INSERT INTO email_table (emailfrom, subject, content, datetime, emailto, folderid) " +
+                "values ('marko@mail.com', 'Pozdrav', 'Javljam se u vezi oglasa bla bla bla bla bla bla bla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla bla', 'Sun Aug 01 14:58:44 2020', 'stalone@mail.com', '1')," +
+                "('facebook@facebook.com', 'Notification', 'Bla bla bla', 'Sun Aug 04 14:58:44 2020', 'marko@mail.com', '1')," +
+                "('petar@gmail.com', 'Pozdrav', 'Zovem povodom polovnog...', 'Fri Aug 16 11:58:44 2020','marko@mail.com', '1')," +
+                "('someone@gmail.com', 'Pozdrav', 'Caoo, sta ima', 'Sun Aug 18 13:58:44 2020','marko@mail.com', '2')," +
+                "('linkedin@linkedin.com', 'Pozdrav', 'Something important bla bla', 'Mon Sep 01 04:58:44 2020','marko@mail.com', '2')," +
+                "('facebook@gmail.com', 'Hahha', 'Hahha, i woild like to..', 'Sat Sep 05 23:58:44 2020','stalone@mail.com', '1')," +
+                "('johndoe@gmail.com', 'Something', 'Would you like to buy..', 'Mon Sep 06 13:58:44 2020','stalone@mail.com', '1')," +
+                "('silvester@stalone.com', 'Hello', 'I am Balboa!', 'Sat Sep 07 12:58:44 2020','arnold@mail.com', '1')");
 
         db.execSQL("INSERT INTO user_table (name, lastname, email, password) " +
                 "values ('Marko', 'Milovac', 'marko@mail.com', '1234')," +
