@@ -15,7 +15,7 @@ public class LoginActivity extends AppCompatActivity {
 
     EditText email;
     EditText password;
-    Button btnLogin;
+    Button btnLogin, btnRegister;
     DatabaseHelper myDb;
     String userId;
     String userEmail;
@@ -27,7 +27,7 @@ public class LoginActivity extends AppCompatActivity {
         email = (EditText)findViewById(R.id.login_email);
         password = (EditText)findViewById(R.id.login_password);
         btnLogin = (Button) findViewById(R.id.btn_login);
-
+        btnRegister = findViewById(R.id.btn_register);
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -37,6 +37,14 @@ public class LoginActivity extends AppCompatActivity {
                     startActivity(new Intent(LoginActivity.this, MainActivity.class));
                     finish();
                 }
+            }
+        });
+
+        btnRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                    startActivity(new Intent(LoginActivity.this, Register.class));
+                    finish();
             }
         });
 

@@ -64,6 +64,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     }
 
+    public boolean addUser(String name, String lastname, String email, String password){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("name", name);
+        contentValues.put("lastname", lastname);
+        contentValues.put("email", email);
+        contentValues.put("password", password);
+        long result = db.insert("user_table",null, contentValues);
+        if(result == -1)
+            return false;
+        else
+            return true;
+
+    }
+
     public boolean addFolder(String name, String userId){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -85,7 +100,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public Cursor getAllMails(String emailTo){
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor mails = db.rawQuery("SELECT * FROM EMAIL_TABLE WHERE EMAILTO = '" + emailTo + "'" , null);
+        Cursor mails = db.rawQuery("SELECT * FROM EMAIL_TABLE WHERE EMAILTO = '" + emailTo + "' ORDER BY DATETIME ASC " , null);
         return mails;
     }
 
