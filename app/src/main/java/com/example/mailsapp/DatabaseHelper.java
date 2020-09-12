@@ -28,6 +28,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS user_table");
         db.execSQL("DROP TABLE IF EXISTS email_table");
         db.execSQL("DROP TABLE IF EXISTS folder_table");
+        db.execSQL("DROP TABLE IF EXISTS contact_table");
         //db.execSQL("DROP TABLE IF EXISTS sent_email_table");
         onCreate(db);
     }
@@ -161,6 +162,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return contact;
     }
 
+    public Cursor updateEmailFolderById(String emailId, String folderId){
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor emailFolder = db.rawQuery("UPDATE EMAIL_TABLE SET FOLDERID = '" + folderId + "' WHERE _id = " + emailId, null);
+        emailFolder.moveToFirst();
+        return emailFolder;
+    }
+
     public Cursor deleteContactById(String id){
 
         SQLiteDatabase db = this.getWritableDatabase();
@@ -205,6 +214,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "('Novak', 'Djokovic', 'nole@mail.com', '1')," +
                 "('FTN', 'Sluzba', 'ssluzbaftn@uns.ac.rs', '1')");
 
-        db.execSQL("INSERT INTO folder_table (name, userid) values ('Spam', '1'), ('Important', '1')");
+        db.execSQL("INSERT INTO folder_table (name, userid) values ('Important', '1'), ('Spam', '1'), ('Trash', '1')");
     }
 }

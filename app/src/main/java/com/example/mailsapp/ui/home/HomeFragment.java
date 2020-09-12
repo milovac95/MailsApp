@@ -15,6 +15,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.mailsapp.DatabaseHelper;
+import com.example.mailsapp.FolderDialogClass;
 import com.example.mailsapp.MailSingleActivity;
 import com.example.mailsapp.Preferences;
 import com.example.mailsapp.adapters.MailCursorAdapter;
@@ -47,6 +48,15 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemClickLis
         MailCursorAdapter mailCursorAdapter = new MailCursorAdapter(getActivity(), R.layout.mail_list_item, mails, 0);
         mailList.setAdapter(mailCursorAdapter);
         mailList.setOnItemClickListener(this);
+        mailList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                String itemId = mails.getString(0);
+                FolderDialogClass folderDialogClass=new FolderDialogClass(getActivity(), itemId);
+                folderDialogClass.show();
+                return true;
+            }
+        });
     }
 
     @Override
