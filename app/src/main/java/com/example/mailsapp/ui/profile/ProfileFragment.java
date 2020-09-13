@@ -70,9 +70,11 @@ public class ProfileFragment extends Fragment implements AdapterView.OnItemClick
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         String userId = users.getString(0);
+        String userEmail = users.getString(3);
 
         Intent intent = new Intent(getActivity(), MainActivity.class);
         Preferences.setPreferencesUserId(getActivity(), userId);
+        Preferences.setPreferencesUserEmail(getActivity(), userEmail);
         startActivity(intent);
     }
 

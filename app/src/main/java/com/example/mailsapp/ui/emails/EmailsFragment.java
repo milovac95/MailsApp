@@ -29,6 +29,7 @@ public class EmailsFragment extends Fragment {
     EditText emailTo, emailSubject, emailContent;
     String userId;
     Button btnSend;
+    String emailFrom;
     private EmailsViewModel mViewModel;
 
     public static EmailsFragment newInstance() {
@@ -69,6 +70,7 @@ public class EmailsFragment extends Fragment {
         emailSubject = (EditText) getView().findViewById(R.id.emailSubjectInput);
         emailContent = (EditText) getView().findViewById(R.id.emailContentInput);
         userId = Preferences.getPreferencesUserId(getActivity());
+        emailFrom = Preferences.getPreferencesUserEmail(getActivity());
         btnSend = (Button) getView().findViewById(R.id.btnSendEmail);
         AddData();
     }
@@ -78,8 +80,8 @@ public class EmailsFragment extends Fragment {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        boolean isInserted = myDb.sendEmail(emailTo.getText().toString(), emailSubject.getText().toString(),
-                                emailContent.getText().toString(), userId);
+                        boolean isInserted = myDb.sendEmail(emailFrom, emailSubject.getText().toString(),
+                                emailContent.getText().toString(), emailTo.getText().toString());
                         if(isInserted == true)
                             Toast.makeText(getActivity(), "Data inserted", Toast.LENGTH_LONG).show();
                         else

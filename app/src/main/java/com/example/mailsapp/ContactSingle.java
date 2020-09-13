@@ -51,10 +51,11 @@ public class ContactSingle extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(ContactSingle.this, Emails.class);
-                intent.putExtra("mailTo", email);
-                intent.putExtra("mailSubject", "");
-                intent.putExtra("mailContent", "");
+                Intent intent = new Intent(ContactSingle.this, ContactEdit.class);
+                intent.putExtra("email", email);
+                intent.putExtra("name", name);
+                intent.putExtra("lastname", lastname);
+                intent.putExtra("contactId", contactId);
                 startActivity(intent);
             }
         });
