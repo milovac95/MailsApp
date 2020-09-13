@@ -95,13 +95,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public Cursor getAllSentMails(String emailFrom){
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("SELECT * FROM EMAIL_TABLE WHERE EMAILFROM ='" + emailFrom + "'", null);
+        Cursor res = db.rawQuery("SELECT * FROM EMAIL_TABLE WHERE EMAILFROM ='" + emailFrom + "'ORDER BY _id desc ", null);
         return res;
     }
 
     public Cursor getAllMails(String emailTo){
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor mails = db.rawQuery("SELECT * FROM EMAIL_TABLE WHERE EMAILTO = '" + emailTo + "' ORDER BY DATETIME ASC " , null);
+        Cursor mails = db.rawQuery("SELECT * FROM EMAIL_TABLE WHERE EMAILTO = '" + emailTo + "' ORDER BY _id desc " , null);
         return mails;
     }
 
